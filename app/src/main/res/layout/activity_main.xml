@@ -13,7 +13,7 @@
         android:visibility="gone" />
 
     <LinearLayout
-        android:id="@+id/ll_error_message_display"
+        android:id="@+id/error_message_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/error_no_internet_title"
+            android:text="@string/error_message_no_internet_title"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/error_no_internet" />
+            android:text="@string/error_message_no_internet" />
     </LinearLayout>
 
     <ProgressBar

@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.android.popularmovies.data.model.Movie;
 import com.example.android.popularmovies.data.model.TMDBResponse;
 import com.example.android.popularmovies.data.remote.TMDBService;
 import com.example.android.popularmovies.utils.ApiUtils;
@@ -31,14 +33,12 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private TMDBService mService;
     private MoviePosterAdapter mAdapter;
 
-    private static final String API_KEY = BuildConfig.THEMOVIEDB_API_KEY;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mErrorMessageDisplay = findViewById(R.id.ll_error_message_display);
+        mErrorMessageDisplay = findViewById(R.id.error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
 
         mService = ApiUtils.getTMDBService();
@@ -87,8 +87,13 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     }
 
     @Override
-    public void onClick(int selectedMovieIndex) {
-        Toast.makeText(this, "index " + selectedMovieIndex, Toast.LENGTH_SHORT).show();
+    public void onClick(Movie selectedMovie) {
+        Toast.makeText(this, "title: " + selectedMovie.getTitle(), Toast.LENGTH_SHORT).show();
+        Context context = this;
+        Class destinationClass = DetailActivity.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+        intentToStartDetailActivity.putExtra(getString(R.string.MOVIE), selectedMovie);
+        startActivity(intentToStartDetailActivity);
     }
 
     private void showErrorMessage() {
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         mRecyclerView.setVisibility(View.INVISIBLE);
     }
     private void showData() {
-        mErrorMessageDisplay = findViewById(R.id.ll_error_message_display);
+        mErrorMessageDisplay = findViewById(R.id.error_message_display);
         mErrorMessageDisplay.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
     }

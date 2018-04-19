@@ -32,7 +32,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     }
 
     public interface MovieAdapterOnClickHandler {
-        void onClick(int selectedMovieIndex);
+        void onClick(Movie selectedMovie);
     }
 
     class MoviePosterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -53,7 +53,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            mClickHandler.onClick(adapterPosition);
+            mClickHandler.onClick(mMovies.get(adapterPosition));
         }
     }
 

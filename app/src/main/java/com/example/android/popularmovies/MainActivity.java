@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -20,6 +21,9 @@ import com.example.android.popularmovies.data.model.TMDBResponse;
 import com.example.android.popularmovies.data.remote.TMDBService;
 import com.example.android.popularmovies.utils.ApiUtils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Optional;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,9 +32,9 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private RecyclerView mRecyclerView;
-    private LinearLayout mErrorMessageDisplay;
-    private ProgressBar mLoadingIndicator;
+    @Nullable @BindView(R.id.rv_movies) RecyclerView mRecyclerView;
+    @Nullable @BindView(R.id.error_message_display) LinearLayout mErrorMessageDisplay;
+    @Nullable @BindView(R.id.pb_loading_indicator) ProgressBar mLoadingIndicator;
     private TMDBService mService;
     private MoviePosterAdapter mAdapter;
 
@@ -38,15 +42,11 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         Toolbar toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
-
-        mErrorMessageDisplay = findViewById(R.id.error_message_display);
-        mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
-
         mService = ApiUtils.getTMDBService();
-        mRecyclerView = findViewById(R.id.rv_movies);
         mAdapter = new MoviePosterAdapter(this, this);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
     @Override
     public void onClick(Movie selectedMovie) {
-        Toast.makeText(this, "title: " + selectedMovie.getTitle(), Toast.LENGTH_SHORT).show();
         Context context = this;
         Class destinationClass = DetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     }
 
     private void showData() {
-        mErrorMessageDisplay = findViewById(R.id.error_message_display);
         mErrorMessageDisplay.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
     }

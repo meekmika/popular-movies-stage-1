@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+
 
         mErrorMessageDisplay = findViewById(R.id.error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
@@ -97,10 +101,10 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     }
 
     private void showErrorMessage() {
-
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.INVISIBLE);
     }
+
     private void showData() {
         mErrorMessageDisplay = findViewById(R.id.error_message_display);
         mErrorMessageDisplay.setVisibility(View.GONE);

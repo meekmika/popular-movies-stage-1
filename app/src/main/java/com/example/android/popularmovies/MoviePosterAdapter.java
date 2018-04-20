@@ -71,9 +71,8 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     @Override
     public void onBindViewHolder(MoviePosterViewHolder holder, int position) {
         String posterPath = mMovies.get(position).getPosterPath();
-        String url = ApiUtils.getImageUrl(posterPath);
+        String url = ApiUtils.getImageUrl(posterPath, "w500");
         Picasso.with(mContext).load(url).into(holder.mMoviePosterImageView);
-        holder.mMoviePosterImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     @Override

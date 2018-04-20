@@ -5,4 +5,6 @@
 
     <string name="error_message_no_internet_title">Uh oh!</string>
     <string name="error_message_no_internet">Make sure you are connected to the internet</string>
+    <string name="original_title">Original Title</string>
+    <string name="overview">Overview</string>
 </resources>

@@ -11,13 +11,11 @@ public class ApiUtils {
     public static final String API_BASE_URL = "https://api.themoviedb.org/3/";
     private static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
 
-    private static final String IMAGE_SIZE = "w500";
-
     public static TMDBService getTMDBService() {
         return RetrofitClient.getClient(API_BASE_URL).create(TMDBService.class);
     }
 
-    public static String getImageUrl(String posterPath) {
-        return IMAGE_BASE_URL + "/" + IMAGE_SIZE  + posterPath;
+    public static String getImageUrl(String posterPath, String imageSize) {
+        return IMAGE_BASE_URL + "/" + imageSize  + posterPath;
     }
 }

@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.android.popularmovies.data.model.Movie;
 import com.example.android.popularmovies.data.model.TMDBResponse;
@@ -23,7 +22,6 @@ import com.example.android.popularmovies.utils.ApiUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Optional;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         Context context = this;
         Class destinationClass = DetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-        intentToStartDetailActivity.putExtra(getString(R.string.MOVIE), selectedMovie);
+        intentToStartDetailActivity.putExtra(getString(R.string.movie_key), selectedMovie);
         startActivity(intentToStartDetailActivity);
     }
 

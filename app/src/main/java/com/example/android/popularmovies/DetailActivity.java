@@ -40,7 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mMovie = getIntent().getParcelableExtra(getString(R.string.MOVIE));
+        mMovie = getIntent().getParcelableExtra(getString(R.string.movie_key));
 
         mCollapsingToolbarLayout.setTitle(mMovie.getTitle());
         mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedTitleTextStyle);

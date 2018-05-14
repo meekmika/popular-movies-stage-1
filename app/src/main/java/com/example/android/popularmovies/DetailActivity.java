@@ -1,12 +1,11 @@
 package com.example.android.popularmovies;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.example.android.popularmovies.data.model.Movie;
 import com.example.android.popularmovies.utils.ApiUtils;
@@ -19,16 +18,23 @@ import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
 
+    @BindView(R.id.iv_movie_backdrop)
+    ImageView mMovieBackdropImageView;
+    @BindView(R.id.iv_movie_poster)
+    ImageView mMoviePosterImageView;
+    @BindView(R.id.tv_movie_release_date)
+    TextView mMovieReleaseDateTextView;
+    @BindView(R.id.tv_movie_rating)
+    TextView mMovieRatingTextView;
+    @BindView(R.id.tv_movie_original_title)
+    TextView mMovieOriginalTitle;
+    @BindView(R.id.tv_movie_overview)
+    TextView mMovieOverviewTextView;
+    @BindView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @BindView(R.id.detail_toolbar)
+    Toolbar mToolbar;
     private Movie mMovie;
-    @BindView(R.id.iv_movie_backdrop) ImageView mMovieBackdropImageView;
-    @BindView(R.id.iv_movie_poster) ImageView mMoviePosterImageView;
-    @BindView(R.id.tv_movie_release_date) TextView mMovieReleaseDateTextView;
-    @BindView(R.id.tv_movie_rating) TextView mMovieRatingTextView;
-    @BindView(R.id.tv_movie_original_title) TextView mMovieOriginalTitle;
-    @BindView(R.id.tv_movie_overview) TextView mMovieOverviewTextView;
-
-    @BindView(R.id.collapsing_toolbar_layout) CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @BindView(R.id.detail_toolbar) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         String releaseDate = mMovie.getReleaseDate();
-        String releaseYear = releaseDate.substring(0,4);
+        String releaseYear = releaseDate.substring(0, 4);
         mMovieReleaseDateTextView.setText(releaseYear);
 
         String rating = Double.toString(mMovie.getVoteAverage());

@@ -16,6 +16,6 @@ public class ApiUtils {
     }
 
     public static String getImageUrl(String posterPath, String imageSize) {
-        return IMAGE_BASE_URL + "/" + imageSize  + posterPath;
+        return IMAGE_BASE_URL + "/" + imageSize + posterPath;
     }
 }

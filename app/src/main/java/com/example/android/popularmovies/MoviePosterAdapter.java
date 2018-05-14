@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.android.popularmovies.data.model.Movie;
 import com.example.android.popularmovies.utils.ApiUtils;
@@ -24,40 +23,14 @@ import butterknife.ButterKnife;
 
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MoviePosterViewHolder> {
 
+    private final MovieAdapterOnClickHandler mClickHandler;
     private List<Movie> mMovies;
     private Context mContext;
-    private final MovieAdapterOnClickHandler mClickHandler;
 
     public MoviePosterAdapter(MovieAdapterOnClickHandler clickHandler, Context context) {
         mMovies = new ArrayList<Movie>(0);
         mContext = context;
         mClickHandler = clickHandler;
-    }
-
-    public interface MovieAdapterOnClickHandler {
-        void onClick(Movie selectedMovie);
-    }
-
-    class MoviePosterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        @BindView(R.id.iv_movie_poster) ImageView mMoviePosterImageView;
-
-        public MoviePosterViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
-        }
-
-        /**
-         * This gets called by the child views during a click.
-         *
-         * @param v The View that was clicked
-         */
-        @Override
-        public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
-            mClickHandler.onClick(mMovies.get(adapterPosition));
-        }
     }
 
     @Override
@@ -75,7 +48,10 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     public void onBindViewHolder(MoviePosterViewHolder holder, int position) {
         String posterPath = mMovies.get(position).getPosterPath();
         String url = ApiUtils.getImageUrl(posterPath, "w500");
-        Picasso.with(mContext).load(url).into(holder.mMoviePosterImageView);
+        Picasso.with(mContext)
+                .load(url)
+                .placeholder(R.drawable.poster_placeholder)
+                .into(holder.mMoviePosterImageView);
     }
 
     @Override
@@ -87,5 +63,32 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     public void setMovieData(List<Movie> movieData) {
         mMovies = movieData;
         notifyDataSetChanged();
+    }
+
+    public interface MovieAdapterOnClickHandler {
+        void onClick(Movie selectedMovie);
+    }
+
+    class MoviePosterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.iv_movie_poster)
+        ImageView mMoviePosterImageView;
+
+        public MoviePosterViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+        }
+
+        /**
+         * This gets called by the child views during a click.
+         *
+         * @param v The View that was clicked
+         */
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            mClickHandler.onClick(mMovies.get(adapterPosition));
+        }
     }
 }
